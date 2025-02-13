@@ -58,6 +58,60 @@ class _HomeRootPageState extends State<HomeRootPage> {
     ));
   }
 
+  _buildTopBar() {
+    return TextFloatingNavBar(onTap: (i, r) {}, currentIndex: 0, items: [
+      TextFloatNavigationItem(route: Routes.explore(), text: 'Tudo'),
+      TextFloatNavigationItem(route: '/casual', text: 'Casual'),
+      TextFloatNavigationItem(route: '/social', text: 'Social'),
+      TextFloatNavigationItem(route: '/sport', text: 'Sport'),
+      TextFloatNavigationItem(route: '/party', text: 'Party'),
+    ]);
+  }
+
+  _buildLeftBar() {
+    return IconFloatingNavBar(
+      currentIndex: 0,
+      items: [
+        IconFloatNavigationItem(
+            route: '/home',
+            image: Image.asset(
+              'assets/images/select.png',
+              height: 24,
+              width: 24,
+            )),
+        IconFloatNavigationItem(
+            route: '/home',
+            image: Image.asset(
+              'assets/images/man.png',
+              height: 24,
+              width: 24,
+            )),
+        IconFloatNavigationItem(
+            route: '/home',
+            image: Image.asset(
+              'assets/images/woman.png',
+              height: 24,
+              width: 24,
+            )),
+        IconFloatNavigationItem(
+            route: '/home',
+            image: Image.asset(
+              'assets/images/boy.png',
+              height: 24,
+              width: 24,
+            )),
+        IconFloatNavigationItem(
+            route: '/home',
+            image: Image.asset(
+              'assets/images/girl.png',
+              height: 24,
+              width: 24,
+            )),
+      ],
+      onTap: (int index, String route) {},
+    );
+  }
+
   _buildWebBody() {
     final screenWidth = MediaQuery.sizeOf(context).width;
     final screenHeight = MediaQuery.sizeOf(context).height;
@@ -67,60 +121,11 @@ class _HomeRootPageState extends State<HomeRootPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextFloatingNavBar(onTap: (i, r) {}, currentIndex: 0, items: [
-            TextFloatNavigationItem(route: Routes.explore(), text: 'Tudo'),
-            TextFloatNavigationItem(route: '/casual', text: 'Casual'),
-            TextFloatNavigationItem(route: '/social', text: 'Social'),
-            TextFloatNavigationItem(route: '/sport', text: 'Sport'),
-            TextFloatNavigationItem(route: '/party', text: 'Party'),
-          ]),
+          _buildTopBar(),
           Row(
             children: [
               Expanded(
-                child: Align(
-                  alignment: Alignment(1, 0),
-                  child: IconFloatingNavBar(
-                    currentIndex: 0,
-                    items: [
-                      IconFloatNavigationItem(
-                          route: '/home',
-                          image: Image.asset(
-                            'assets/images/select.png',
-                            height: 24,
-                            width: 24,
-                          )),
-                      IconFloatNavigationItem(
-                          route: '/home',
-                          image: Image.asset(
-                            'assets/images/man.png',
-                            height: 24,
-                            width: 24,
-                          )),
-                      IconFloatNavigationItem(
-                          route: '/home',
-                          image: Image.asset(
-                            'assets/images/woman.png',
-                            height: 24,
-                            width: 24,
-                          )),
-                      IconFloatNavigationItem(
-                          route: '/home',
-                          image: Image.asset(
-                            'assets/images/boy.png',
-                            height: 24,
-                            width: 24,
-                          )),
-                      IconFloatNavigationItem(
-                          route: '/home',
-                          image: Image.asset(
-                            'assets/images/girl.png',
-                            height: 24,
-                            width: 24,
-                          )),
-                    ],
-                    onTap: (int index, String route) {},
-                  ),
-                ),
+                child: Align(alignment: Alignment(1, 0), child: _buildLeftBar()),
               ),
               AppContainer(padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), height: screenWidth * 0.45, width: screenWidth * 0.65, child: widget.page),
               Expanded(child: SizedBox())
@@ -132,6 +137,18 @@ class _HomeRootPageState extends State<HomeRootPage> {
   }
 
   _buildMobileBody() {
-    return widget.page;
+    return Column(
+      children: [
+        _buildTopBar(),
+        Expanded(
+          child: Row(
+            children: [
+              _buildLeftBar(),
+              Expanded(child: widget.page),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
