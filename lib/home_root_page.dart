@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_look/config/routing/routes.dart';
+import 'main.dart';
 import 'shared/app_container.dart';
 import 'shared/icon_floating_nav_bar.dart';
 import 'shared/text_floating_nav_bar.dart';
@@ -51,7 +52,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isScreenLarge = MediaQuery.of(context).size.width >= 1100;
+    final isScreenLarge = MediaQuery.of(context).size.width >= 600;
     return SafeArea(
         child: Scaffold(
       body: isScreenLarge ? _buildWebBody() : _buildMobileBody(),
@@ -59,13 +60,18 @@ class _HomeRootPageState extends State<HomeRootPage> {
   }
 
   _buildTopBar() {
-    return TextFloatingNavBar(onTap: (i, r) {}, currentIndex: 0, items: [
-      TextFloatNavigationItem(route: Routes.explore(), text: 'Tudo'),
-      TextFloatNavigationItem(route: '/casual', text: 'Casual'),
-      TextFloatNavigationItem(route: '/social', text: 'Social'),
-      TextFloatNavigationItem(route: '/sport', text: 'Sport'),
-      TextFloatNavigationItem(route: '/party', text: 'Party'),
-    ]);
+    return TextFloatingNavBar(
+        onTap: (i, r) {
+          analytics.logSearch(searchTerm: r);
+        },
+        currentIndex: 0,
+        items: [
+          TextFloatNavigationItem(route: Routes.explore(), text: 'Tudo'),
+          TextFloatNavigationItem(route: '/casual', text: 'Casual'),
+          TextFloatNavigationItem(route: '/social', text: 'Social'),
+          TextFloatNavigationItem(route: '/sport', text: 'Sport'),
+          TextFloatNavigationItem(route: '/party', text: 'Party'),
+        ]);
   }
 
   _buildLeftBar() {
@@ -73,42 +79,47 @@ class _HomeRootPageState extends State<HomeRootPage> {
       currentIndex: 0,
       items: [
         IconFloatNavigationItem(
-            route: '/home',
+            route: '/all',
             image: Image.asset(
               'assets/images/select.png',
               height: 24,
               width: 24,
             )),
         IconFloatNavigationItem(
-            route: '/home',
+            route: '/man',
             image: Image.asset(
               'assets/images/man.png',
               height: 24,
               width: 24,
             )),
         IconFloatNavigationItem(
-            route: '/home',
+            route: '/woman',
             image: Image.asset(
               'assets/images/woman.png',
               height: 24,
               width: 24,
             )),
         IconFloatNavigationItem(
-            route: '/home',
+            route: '/boy',
             image: Image.asset(
               'assets/images/boy.png',
               height: 24,
               width: 24,
             )),
         IconFloatNavigationItem(
-            route: '/home',
+            route: '/girl',
             image: Image.asset(
               'assets/images/girl.png',
               height: 24,
               width: 24,
             )),
       ],
-      onTap: (int index, String route) {},
+      onTap: (int index, String route) {
+        analytics.logSelectContent(
+          contentType: 'Gender',
+          itemId: index.toString(),
+        );
+      },
     );
   }
 

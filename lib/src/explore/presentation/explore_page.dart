@@ -4,6 +4,8 @@ import 'package:snap_look/config/routing/routes.dart';
 import 'package:snap_look/src/explore/presentation/components/explore_set_card.dart';
 import 'package:snap_look/src/explore/presentation/explore_view.dart';
 
+import '../../../main.dart';
+
 class ExplorePage extends StatefulWidget {
   final String? gender;
   final String? style;
@@ -47,9 +49,7 @@ class _ExplorePageState extends State<ExplorePage> {
       itemBuilder: (context, index) {
         final set = view.sets[index];
         return InkWell(
-            onTap: () => context.push(
-                  Routes.clothingSet(set.id),
-                ),
+            onTap: () => analytics.logAddToWishlist(),
             child: AspectRatio(
                 aspectRatio: 0.65,
                 child: Padding(
