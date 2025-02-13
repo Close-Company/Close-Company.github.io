@@ -5,11 +5,15 @@ import 'package:snap_look/config/injector.dart';
 import 'package:snap_look/config/theme/app_theme.dart';
 import 'package:snap_look/config/routing/router.dart';
 
+import 'firebase_options.dart';
+
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   injector.register();
   runApp(const MyApp());
 }
