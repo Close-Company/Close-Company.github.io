@@ -1,0 +1,32 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Aciona o workflow toda vez que houver push na branch main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'  # Ajuste para a versão do seu Flutter
+
+      - name: Install dependencies
+        run: flutter pub get  # Instala as dependências do Flutter
+
+      - name: Build Flutter Web
+        run: flutter build web --release  # Gera os arquivos estáticos para web
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # Branch onde os arquivos web serão enviados
+          folder: build/web  # Pasta que contém os arquivos gerados
+          token: ${{ secrets.GITHUB_TOKEN }}  # Garante que a ação tenha permissões para fazer o push
