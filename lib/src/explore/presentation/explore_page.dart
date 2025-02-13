@@ -51,7 +51,7 @@ class _ExplorePageState extends State<ExplorePage> {
                   Routes.clothingSet(set.id),
                 ),
             child: AspectRatio(
-                aspectRatio: 0.9,
+                aspectRatio: 0.65,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ExploreSetCard(clothingSet: set),
