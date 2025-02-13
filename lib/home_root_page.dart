@@ -51,7 +51,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isScreenLarge = MediaQuery.of(context).size.width >= 600;
+    final isScreenLarge = MediaQuery.of(context).size.width >= 1100;
     return SafeArea(
         child: Scaffold(
       body: isScreenLarge ? _buildWebBody() : _buildMobileBody(),

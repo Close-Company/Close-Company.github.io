@@ -26,18 +26,16 @@ class _TextFloatingNavBarState extends State<TextFloatingNavBar> {
   _buildBottomNavigation() {
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppContainer(
-            borderRadius: 100,
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              spacing: 6,
-              children: widget.items.map((item) => _buildItem(item)).toList(),
-            ),
+      child: AppContainer(
+        borderRadius: 100,
+        padding: const EdgeInsets.all(8),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal, // Garantir rolagem horizontal
+          child: Row(
+            spacing: 6,
+            children: widget.items.map((item) => _buildItem(item)).toList(),
           ),
-        ],
+        ),
       ),
     );
   }

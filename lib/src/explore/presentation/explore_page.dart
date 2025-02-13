@@ -17,7 +17,7 @@ class _ExplorePageState extends State<ExplorePage> {
   final view = ExploreView();
   @override
   Widget build(BuildContext context) {
-    bool isScreenLarge = MediaQuery.of(context).size.width >= 600;
+    bool isScreenLarge = MediaQuery.of(context).size.width >= 1100;
     return ListenableBuilder(
         listenable: view.loadSets,
         builder: (context, child) {
